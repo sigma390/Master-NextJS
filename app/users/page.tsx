@@ -2,7 +2,8 @@ import React from 'react'
 
 interface UsersType {
     id:number;
-    name:string
+    name:string;
+    email:string
 }
 
 
@@ -25,16 +26,29 @@ const UserPage = async () => {
     <div className='text-black'>
         <p className='text-black text-4xl'>Users</p>
         <p>{new Date().toLocaleTimeString()}</p> 
-        <div className='text-black'>
+        <table className=' text-black table table-bordered'>
+            <thead >
+                <tr>
+                    <th className='text-black'>Name</th>
+                    <th className='text-black'>Email</th>
+                </tr>
+            </thead>
+            <tbody>
             {
-                users.map(user =><li key={user.id}>{user.name}</li> 
+                users.map(user =><tr key={user.id}>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                </tr> 
 
                 )
             }
 
+            </tbody>
+            
 
 
-        </div>
+
+        </table>
       
     </div>
   )
