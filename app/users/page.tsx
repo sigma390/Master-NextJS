@@ -1,10 +1,14 @@
 import React from 'react'
 import UsersPage from './UsersPage'
 
+//access the query params
+
+interface Props {
+  searchParams :{sortOrder:string}
+}
 
 
-
-const UserPage = async () => {
+const UserPage = async ({searchParams:{sortOrder}}:Props) => {
 
     
 
@@ -15,7 +19,7 @@ const UserPage = async () => {
   return (
     <>
         <h1>Users</h1>
-        <UsersPage/>
+        <UsersPage sortOrder = {sortOrder}/>
     
     </>
     
