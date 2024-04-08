@@ -18,3 +18,11 @@ body {
   padding: 1rem;
   background-color: white; /* Change background color to white */
 }
+
+
+
+@layer base {
+  h1 {
+    @apply font-bold
+  }
+}
