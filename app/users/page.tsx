@@ -1,4 +1,6 @@
-import React from 'react'
+
+
+import React, { Suspense } from 'react'
 import UsersPage from './UsersPage'
 import Link from 'next/link'
 
@@ -21,7 +23,14 @@ const UserPage = async ({searchParams:{sortOrder}}:Props) => {
     <>
         <h1>Users</h1>
         <Link href='/users/new' className='btn'>New User</Link>
+        {/* A Loader */}
+        <Suspense fallback={<p>Loading!!!</p>}>
         <UsersPage sortOrder = {sortOrder}/>
+
+
+
+        </Suspense>
+        
     
     </>
     
