@@ -29,3 +29,5 @@ export async function POST(req:NextRequest){
    }
    return NextResponse.json({id:1, name:body.name});
 }
+
+//Put method
