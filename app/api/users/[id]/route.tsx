@@ -1,5 +1,7 @@
 import { error } from 'console';
 import { NextRequest, NextResponse } from 'next/server';
+import { Schema } from 'zod';
+import { schema } from '../schema';
 
 
 type UserProps = {
@@ -25,8 +27,12 @@ export function GET(req:NextRequest, {params:{id}}:UserProps){
 
 export async function PUT(req:NextRequest, {params:{id}}:UserProps){
     const body = await req.json();
-    if (!body.name) {
-        return NextResponse.json({error:"Name required!!!"},{status:400})
+
+    const validation = schema.safeParse(body);
+
+
+    if (!validation.success) {
+        return NextResponse.json(validation.error.errors,{status:400})
         
     }
     if(id >10){

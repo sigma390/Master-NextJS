@@ -4,6 +4,7 @@
 //get method
 
 import { NextRequest, NextResponse } from "next/server";
+import { schema } from "./schema";
 
 export function GET(request:NextRequest){
     return NextResponse.json([
@@ -23,8 +24,9 @@ export function GET(request:NextRequest){
 //post method 
 export async function POST(req:NextRequest){
    const body =  await req.json();
-   if (!body.name) {
-    return NextResponse.json({error:'Name not found!!!'},{status:400});
+   const val = schema.safeParse(body);
+   if (!val.success) {
+    return NextResponse.json(val.error.errors,{status:400});
     
    }
    return NextResponse.json({id:1, name:body.name});
