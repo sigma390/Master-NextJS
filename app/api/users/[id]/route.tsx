@@ -22,6 +22,7 @@ export async function GET(req:NextRequest, {params:{id}}:UserProps){
     //     id:1,
     //     name:'Omkar'
     // })
+
    const user = await prisma.user.findUnique({
         where:{id: parseInt(id)} //as the params inn url are string so we convert string to number asin our model the id is number type
     })
