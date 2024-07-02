@@ -27,3 +27,9 @@ model Prods {
   name  String @unique
   price Float
 }
+
+model Products {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  price Float
+}
