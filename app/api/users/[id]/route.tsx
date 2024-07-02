@@ -41,15 +41,42 @@ export async function PUT(req:NextRequest, {params:{id}}:UserProps){
 
     const validation = schema.safeParse(body);
 
+    const userId = parseInt(id);
+
+    // Check for user presence
+    const userPresent = await prisma.user.findUnique({
+        where: {
+            id: userId
+        }
+    });
 
     if (!validation.success) {
-        return NextResponse.json(validation.error.errors,{status:400})
-        
+        return NextResponse.json(validation.error.errors, { status: 400 });
     }
-    if(id >'10'){
-        return NextResponse.json({error:"User not Found!!!"},{status:404})
+
+    if (userId > 10) {
+        return NextResponse.json({ error: "User not Found!!!" }, { status: 404 });
     }
-    return NextResponse.json({id:1, name:body.name});
+
+    if (!userPresent) {
+        return NextResponse.json(
+            { error: "User Not Found!!!" },
+            { status: 400 }
+        );
+    }
+
+    const UpdatedUser = await prisma.user.update({
+        where: {
+            id: userPresent.id
+        },
+        data: {
+            name: body.name,
+            email: body.email
+        }
+    });
+
+    return NextResponse.json(UpdatedUser);
+    
 }
 // delete 
 

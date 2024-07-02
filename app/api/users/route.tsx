@@ -14,6 +14,7 @@ export async  function GET(request:NextRequest){
 
     //get data from database
   const users=  await prisma.user.findMany()
+  console.log(users)
 
 
 
